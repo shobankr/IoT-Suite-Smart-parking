@@ -1,0 +1,45 @@
+﻿<Page
+    x:Class="ParkingLotDisplay.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ParkingLotDisplay"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" FontFamily="Segoe UI Semibold">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="0">
+        <StackPanel>
+            <Border Background="#1ABC9C">
+                <TextBlock Text="Level A" FontSize="48" Foreground="White" Padding="20,5,0,5"/>
+            </Border>
+            <StackPanel Orientation="Horizontal" Padding="0,20,0,0" >
+                <ListView x:Name="lstParkingRows">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Height="100" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                <Border Background="Black">
+                                    <TextBlock Text="{Binding Id}" FontSize="40" Padding="15" Foreground="White" />
+                                </Border>
+                                <ListView ItemsSource="{Binding Status}">
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"></StackPanel>
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel BorderBrush="Black" HorizontalAlignment="Center" Margin="-10,0" Padding="15" BorderThickness="1,0,0,1">
+                                                <Image Source="{Binding ImageUrl}" Height="25"/>
+                                                <TextBlock Text="{Binding ParkingLotName}" Foreground="Black" FontSize="30" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

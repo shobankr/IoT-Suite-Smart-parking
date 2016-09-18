@@ -1,0 +1,36 @@
+﻿@using GlobalResources
+@using System.Collections.Generic
+@model IList<KeyValuePair<string, string>>
+@{
+    string firstDeviceId = string.Empty;
+}
+<script src="~/Scripts/Views/Dashboard/TelemetryHistory.js"></script>
+
+<script type="text/javascript" src="~/Scripts/Views/Dashboard/DashboardDevicePane.js"></script>
+<script type="text/javascript">
+    (function () {
+        'use strict';
+
+        var deviceIds = [];
+
+        @foreach (KeyValuePair<string, string> pair in Model)
+        {
+         <text>
+        deviceIds.push('@Html.Encode(pair.Key)');
+        </text>
+
+        }
+
+        var dashboardDevicePaneSettings = {
+            loadDataUrlBase: '/api/v1/telemetry/dashboardDevicePane?deviceId=',
+            refreshMilliseconds: 30000,
+            selectionDropDown: $('#deviceSelection'),
+            telemetryGridRefreshData: IoTApp.Dashboard.TelemetryHistory.updateTelemetryHistoryGridData,
+            deviceId: deviceIds
+        };
+
+        IoTApp.Dashboard.DashboardDevicePane.init(dashboardDevicePaneSettings);
+
+        
+    })();
+</script>

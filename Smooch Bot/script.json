@@ -1,0 +1,4 @@
+{
+    "BOT": "Hi there!\nI’m your personal bot of AMC Mall. What would you like to do? %[Search Shops](postback:search_shops) %[CheckIn Car](postback:check_in) %[Message Helpdesk](postback:message_helpdesk)",
+    "CHECKIN CAR": "Okay! Send me your parking slot. Example : A12"
+}

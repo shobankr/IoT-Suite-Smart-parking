@@ -1,0 +1,200 @@
+﻿@using System.Collections.Generic
+@using System.Web.Mvc.Html
+@using GlobalResources
+@using Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.Helpers
+@model Microsoft.Azure.Devices.Applications.RemoteMonitoring.DeviceAdmin.Web.Models.DashboardModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<style>
+    .btn-circle.btn-lg {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+        line-height: 1.33;
+        border-radius: 25px;
+        background: #F1C40F;
+        border: none;
+        margin: auto;
+    }
+
+    .parking td {
+        padding: 10px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #212528;
+        border-top: none;
+        width: 80px;
+        text-align: center;
+        border-spacing: 0px;
+        height: 80px;
+    }
+
+    .level {
+        background: #212528;
+        color: white;
+    }
+</style>
+
+<script>
+    'use strict';
+
+    var resources = {
+        active: '@Html.JavaScriptString(Strings.Active)',
+        alarm: '@Html.JavaScriptString(Strings.Alarm)',
+        alarmHistory: '@Html.JavaScriptString(Strings.AlarmHistory)',
+        allClearStatusIcon: '/Content/img/icon_status_all_clear.svg',
+        cautionStatusIcon: '/Content/img/icon_status_caution.svg',
+        closed: '@Html.JavaScriptString(Strings.Closed)',
+        criticalStatusIcon: '/Content/img/icon_status_critical.svg',
+        humidity: '@Html.JavaScriptString(Strings.Humidity)',
+        information: '@Html.JavaScriptString(Strings.Information)',
+        telemetryGaugeNumericFormat: '@Html.JavaScriptString(Strings.TelemetryGaugeNumericFormat)',
+        temperature: '@Html.JavaScriptString(Strings.Temperature)',
+        alertHistoryType: '',
+        unableToRetrieveAlertsHistoryFromService: '@Html.JavaScriptString(Strings.UnableToRetrieveAlertsHistoryFromService)',
+        unableToRetrieveDeviceTelemetryFromService: '@Html.JavaScriptString(Strings.UnableToRetrieveDeviceTelemetryFromService)'
+    };
+</script>
+
+<div class="container-fluid">
+    <div class="row" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+        <div class="col-lg-7">
+            <h1 class="display-1">Level A</h1>
+            <hr />
+            <div ng-app="" ng-init="row1=['A11','A12','A13']; row2=['A21','A22','A23','A24','A25', 'A26']; row3=['A31','A32','A33','A34','A35','A36','A37','A38','A39','A310']; row4=['A41','A42','A43','A44','A45']; row5=['A51','A52','A53','A54','A55','A56','A57','A58','A59','A510','A511','A512','A513']; row6=['A61','A62','A63','A64','A65','A66','A67','A68','A69','A610'];">
+                <div class="">
+                    <table class="parking">
+                        <tr>
+                            <td class="level">
+                                <h1 class="display-2">A1</h1>
+                            </td>
+                            <td ng-repeat="x in row1">
+                                <div>
+                                    <button type="button" id="{{ x }}" onclick="setMessageDetails(this.id);" class="btn btn-warning btn-circle btn-lg" style="display:none;"><i class="fa fa-car"></i></button>
+                                     <img id="img{{ x }}" src="~/Content/img/messenger.png" style="display:none;"/>
+                                    <span id="user{{ x }}" style="display:none;"></span>
+                                    <h5>{{ x }}</h5>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <table class="parking">
+                        <tr>
+                            <td class="level">
+                                <h1>A2</h1>
+                            </td>
+                            <td ng-repeat="x in row2">
+                                <div>
+                                    <button type="button" id="{{ x }}" onclick="setMessageDetails(this.id);" class="btn btn-warning btn-circle btn-lg" style="display:none;"><i class="fa fa-car"></i></button>
+                                     <img id="img{{ x }}" src="~/Content/img/messenger.png" style="display:none;" />
+                                    <span id="user{{ x }}" style="display:none;"></span>
+                                    <h5>{{ x }}</h5>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="level">
+                                <h1>A3</h1>
+                            </td>
+                            <td ng-repeat="x in row3">
+                                <div>
+                                    <button type="button" id="{{ x }}" onclick="setMessageDetails(this.id);" class="btn btn-warning btn-circle btn-lg" style="display:none;"><i class="fa fa-car"></i></button>
+                                     <img id="img{{ x }}" src="~/Content/img/messenger.png" style="display:none;" />
+                                    <span id="user{{ x }}" style="display:none;"></span>
+                                    <h5>{{ x }}</h5>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <table class="parking">
+                        <tr>
+                            <td class="level">
+                                <h1>A4</h1>
+                            </td>
+                            <td ng-repeat="x in row4">
+                                <div>
+                                    <button type="button" id="{{ x }}" onclick="setMessageDetails(this.id);" class="btn btn-warning btn-circle btn-lg" style="display:none;"><i class="fa fa-car"></i></button>
+                                     <img id="img{{ x }}" src="~/Content/img/messenger.png" style="display:none;" />
+                                    <span id="user{{ x }}" style="display:none;"></span>
+
+                                    <h5>{{ x }}</h5>
+                                </div>
+                            </td>
+
+                        </tr>
+                    </table>
+
+                    <br />
+                    <br />
+                    <table class="parking">
+                        <tr>
+                            <td class="level">
+                                <h1>A5</h1>
+                            </td>
+                            <td ng-repeat="x in row5">
+                                <div>
+                                    <button type="button" id="{{ x }}" onclick="setMessageDetails(this.id);" class="btn btn-warning btn-circle btn-lg" style="display:none;"><i class="fa fa-car"></i></button>
+                                     <img id="img{{ x }}" src="~/Content/img/messenger.png" style="display:none;" />
+                                    <span id="user{{ x }}" style="display:none;"></span>
+                                    <h5>{{ x }}</h5>
+                                </div>
+                            </td>
+
+                        </tr>
+                    </table>
+
+                    <br />
+                    <br />
+                    <table class="parking">
+                        <tr>
+                            <td class="level">
+                                <h1>A6</h1>
+                            </td>
+                            <td ng-repeat="x in row6">
+                                <div>
+                                    <button type="button" id="{{ x }}" onclick="setMessageDetails(this.id);" class="btn btn-warning btn-circle btn-lg" style="display:none;"><i class="fa fa-car"></i></button>
+                                     <img id="img{{ x }}" src="~/Content/img/messenger.png" style="display:none;" />
+                                    <span id="user{{ x }}" style="display:none;"></span>
+                                    <h5>{{ x }}</h5>
+                                </div>
+                            </td>
+
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            @{
+                Html.RenderPartial("_AlertHistory");
+            }
+        </div>
+    </div>
+</div>
+
+
+@{
+    Html.RenderPartial("_DashboardDevicePane", Model.DeviceIdsForDropdown);
+}
+
+<script>
+    function setMessageDetails(deviceId)
+    {
+        var userId = $("#user" + deviceId).text();
+        $("#toUserId").text(userId);
+        $("#toDisplayName").text(deviceId);
+        $("#sendButton").text("Send Message");
+    }
+
+</script>
+
